@@ -1,0 +1,14 @@
+**/*.test.js
+.eslintrc.js
+yarn.lock
+.babelrc
+.travis.yml
+commitlint.config.js
+lint-staged.config.js
+.huskyrc.js
+env
+bin
+makefile
+babel.config.js
+/src/
+yarn-error.log
