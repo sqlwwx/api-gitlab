@@ -15,7 +15,8 @@
     "debug": "^4.1.1",
     "got": "^10.0.0-alpha.3.2",
     "lodash": "^4.17.15",
-    "pure-func": "^2.0.19"
+    "pure-func": "^2.0.19",
+    "xcase": "^2.0.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.7.0",
