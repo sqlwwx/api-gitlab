@@ -33,12 +33,12 @@ class Gitlab extends EventEmitter {
       hooks: {
         beforeRequest: [
           async requestOptions => {
-            const { context: { key } } = requestOptions
+            const { context: { key }, url: { searchParams } } = requestOptions
             if (requestOptions.json) {
               // eslint-disable-next-line no-param-reassign
               requestOptions.json = snakeCaseObject(requestOptions.json)
             }
-            requestOptions.url.searchParams.forEach((value, name, searchParams) => {
+            Array.from(requestOptions.url.searchParams.entries()).forEach((value, name) => {
               const decamelizeName = decamelize(name)
               if (name !== decamelizeName) {
                 searchParams.set(decamelizeName, value)
