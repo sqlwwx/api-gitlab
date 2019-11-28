@@ -44,14 +44,14 @@ class QueryBuilder {
    * list
    *
    * @param {number} page=1
-   * @param {number} prePage=20 default: 20, max: 100
+   * @param {number} perPage=20 default: 20, max: 100
    * @returns {array}
    */
-  list (page = 1, prePage = 20) {
+  list (page = 1, perPage = 20) {
     assert(this.apiUrl)
     return this.request(this.apiUrl, {
       searchParams: {
-        per_page: prePage,
+        perPage,
         page
       }
     })

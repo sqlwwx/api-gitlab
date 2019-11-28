@@ -1,6 +1,7 @@
 const got = require('got')
 const EventEmitter = require('events')
 const { camelCaseObject, snakeCaseObject } = require('pure-func/lodash')
+const { decamelize } = require('xcase')
 const simpleExpireStore = require('pure-func/simpleExpireStore')
 const debug = require('debug')('gitlab')
 const QueryBuilder = require('./QueryBuilder')
@@ -37,6 +38,13 @@ class Gitlab extends EventEmitter {
               // eslint-disable-next-line no-param-reassign
               requestOptions.json = snakeCaseObject(requestOptions.json)
             }
+            requestOptions.url.searchParams.forEach((value, name, searchParams) => {
+              const decamelizeName = decamelize(name)
+              if (name !== decamelizeName) {
+                searchParams.set(decamelizeName, value)
+                searchParams.delete(name)
+              }
+            })
             // eslint-disable-next-line no-param-reassign
             requestOptions.headers['PRIVATE-TOKEN'] = await this.loadTokenWithCache(key)
             debug(requestOptions.headers)

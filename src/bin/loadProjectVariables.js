@@ -15,7 +15,7 @@ const copyEnvs = async project => {
     .list(1, 100)
   console.log(`project: ${project} variables(${variables.length})`)
   const groupedVariables = (
-    await gitlab.query().project(project).variables().list(0, 100)
+    await gitlab.query().project(project).variables().list(1, 100)
   ).reduce((groups, item) => {
     const { environmentScope } = item
     // eslint-disable-next-line no-param-reassign
