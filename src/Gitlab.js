@@ -38,7 +38,7 @@ class Gitlab extends EventEmitter {
               // eslint-disable-next-line no-param-reassign
               requestOptions.json = snakeCaseObject(requestOptions.json)
             }
-            Array.from(requestOptions.url.searchParams.entries()).forEach((value, name) => {
+            Array.from(searchParams.entries()).forEach((value, name) => {
               const decamelizeName = decamelize(name)
               if (name !== decamelizeName) {
                 searchParams.set(decamelizeName, value)
