@@ -1,19 +1,12 @@
 #!/usr/bin/env node
 
+const fs = require('fs')
+const ini = require('ini')
 const { isEqual } = require('lodash')
-const Gitlab = require('./Gitlab')
+const Gitlab = require('..')
 
-const buildEnv = (text, environmentScope = '*') => text.split('\n').map(item => {
-  const [key, value] = item.split(/\s+/)
-  return {
-    key,
-    value,
-    variable_type: 'env_var',
-    protected: true,
-    masked: false,
-    environmentScope
-  }
-})
+const readIni = filePath => ini.parse(fs.readFileSync(filePath, 'utf-8'))
+
 
 const setShouldDelete = items => {
   items.filter(item => item.isExisted && !item.shouldDelete).forEach(item => {
@@ -41,14 +34,22 @@ const createVariables = async (items, createVariable) => {
   }, Promise.resolve())
 }
 
-const start = async (project, allEnv) => {
-  const envs = [
-    ...buildEnv(allEnv.commom),
-    ...buildEnv(allEnv.pre, 'pre'),
-    ...buildEnv(allEnv.production, 'production')
-  ]
+const start = async () => {
+  const [project] = process.argv.splice(2)
+  const envs = Object.entries(readIni(`env/${project}.ini`)).map(([environmentScope, variables]) => {
+    return Object.entries(variables).map(([key, value]) => {
+      return {
+        key,
+        value,
+        variableType: 'env_var',
+        protected: true,
+        masked: false,
+        environmentScope
+      }
+    })
+  }).flat()
   const gitlab = new Gitlab()
-  const variableApi = gitlab.key('wwx').project(project).variables()
+  const variableApi = gitlab.query().project(project).variables()
   const variables = (await variableApi.list()).reduce((result, item) => {
     const { key, environmentScope } = item
     Object.defineProperties(item, {
@@ -100,6 +101,4 @@ const start = async (project, allEnv) => {
   process.exit(0)
 }
 
-const args = process.argv.splice(2)
-
-start('crm/wechat-api', require(`./${args[0]}`))
+start()

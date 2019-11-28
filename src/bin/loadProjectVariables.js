@@ -13,7 +13,6 @@ const copyEnvs = async project => {
     .project(project)
     .variables()
     .list(1, 100)
-  console.log(`project: ${project} variables(${variables.length})`)
   const groupedVariables = (
     await gitlab.query().project(project).variables().list(1, 100)
   ).reduce((groups, item) => {
@@ -22,10 +21,13 @@ const copyEnvs = async project => {
     groups[environmentScope] = [].concat(groups[environmentScope] || [], item)
     return groups
   }, {})
+  console.log(`; ${project} ${variables.length} variables`)
   Object.entries(groupedVariables).forEach(([scope, items]) => {
-    console.log(`>>>>>>scope(${scope}) ${items.length}`)
-    console.log(items.map(({ key, value }) => `${key} ${value}`).join('\n'))
-    console.log(`<<<<<<scope(${scope})`)
+    console.log(`[${scope}]`)
+    console.log(items.map(({
+      key,
+      value
+    }) => `${key}=${value}`).join('\n'))
   })
   process.exit(0)
 }

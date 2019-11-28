@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const { isEqual } = require('lodash')
 const Gitlab = require('.')
 

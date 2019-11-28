@@ -6,6 +6,11 @@
   "scripts": {
     "release": "standard-version"
   },
+  "bin": {
+    "updateGitlabVariables": "bin/updateVariables.js",
+    "loadGitlabProjectVariables": "bin/loadProjectVariables.js",
+    "copyGitlabVariables": "bin/copyVariables.js"
+  },
   "author": "sqlwwx <wwx@wuweixing.com> (http://wiki.lab.wuweixing.com)",
   "engines": {
     "node": ">=12.13"
@@ -14,6 +19,7 @@
   "dependencies": {
     "debug": "^4.1.1",
     "got": "^10.0.0-alpha.3.2",
+    "ini": "^1.3.5",
     "lodash": "^4.17.15",
     "pure-func": "^2.0.19",
     "xcase": "^2.0.1"
