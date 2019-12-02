@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/sqlwwx/api-gitlab/compare/v0.0.4...v0.0.5) (2019-12-02)
+
+
+### Bug Fixes
+
+* updateVariables ([30488bc](https://github.com/sqlwwx/api-gitlab/commit/30488bc428f83d916350df110872d8a503863ffa))
+
 ### [0.0.4](https://github.com/sqlwwx/api-gitlab/compare/v0.0.2...v0.0.4) (2019-12-01)
 
 
