@@ -35,8 +35,8 @@ const createVariables = async (items, createVariable) => {
 }
 
 const start = async () => {
-  const [project] = process.argv.splice(2)
-  const envs = Object.entries(readIni(`env/${project}.ini`)).map(([environmentScope, variables]) => {
+  const [project, envIni] = process.argv.splice(2)
+  const envs = Object.entries(readIni(envIni)).map(([environmentScope, variables]) => {
     return Object.entries(variables).map(([key, value]) => {
       return {
         key,

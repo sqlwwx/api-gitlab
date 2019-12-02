@@ -21,7 +21,7 @@
     "got": "^10.0.0",
     "ini": "^1.3.5",
     "lodash": "^4.17.15",
-    "pure-func": "^2.0.19",
+    "pure-func": "^3.0.0",
     "xcase": "^2.0.1"
   },
   "devDependencies": {
