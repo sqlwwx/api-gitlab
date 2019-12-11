@@ -9,7 +9,9 @@
   "bin": {
     "updateGitlabVariables": "bin/updateVariables.js",
     "loadGitlabProjectVariables": "bin/loadProjectVariables.js",
-    "copyGitlabVariables": "bin/copyVariables.js"
+    "copyGitlabVariables": "bin/copyVariables.js",
+    "loadGitlabGroupVariables": "bin/loadGroupVariables.js",
+    "updateGitlabGroupVariables": "bin/updateGroupVariables.js"
   },
   "author": "sqlwwx <wwx@wuweixing.com> (http://wiki.lab.wuweixing.com)",
   "engines": {
