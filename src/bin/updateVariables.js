@@ -50,7 +50,7 @@ const start = async () => {
   }).flat()
   const gitlab = new Gitlab()
   const variableApi = gitlab.query().project(project).variables()
-  const variables = (await variableApi.list()).reduce((result, item) => {
+  const variables = (await variableApi.list(1, 100)).reduce((result, item) => {
     const { key, environmentScope } = item
     Object.defineProperties(item, {
       isExisted: { value: true, enumerable: false }
