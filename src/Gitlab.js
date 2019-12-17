@@ -24,7 +24,7 @@ class Gitlab extends EventEmitter {
     super()
     const { endpoint = GITLAB_ENDPOINT, loadToken } = options
     this.loadToken = loadToken || defaultLoadToken
-    this.request = got.extend({
+    this.got = got.extend({
       timeout: 3000,
       prefixUrl: endpoint,
       headers: {
@@ -62,13 +62,18 @@ class Gitlab extends EventEmitter {
             }
             const data = JSON.parse(response.body)
             if (Array.isArray(data)) {
-              return data.map(camelCaseObject)
+              response.body = data.map(camelCaseObject)
             }
-            return camelCaseObject(data)
+            response.body = camelCaseObject(data)
+            return response
           }
         ]
       }
     })
+  }
+
+  async request (url, options = {}) {
+    return this.got(url, options).then(res => res.body)
   }
 
   async loadTokenWithCache (key = 'default') {

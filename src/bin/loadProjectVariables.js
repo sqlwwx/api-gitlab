@@ -27,7 +27,7 @@ const copyEnvs = async project => {
     console.log(items.map(({
       key,
       value
-    }) => `${key}=${value}`).join('\n'))
+    }) => `${key}="${value}"`).join('\n'))
   })
   process.exit(0)
 }
